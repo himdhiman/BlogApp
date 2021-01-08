@@ -1,0 +1,95 @@
+{% extends 'main/base.html' %}
+
+{% if user.is_authenticated %}
+<ul class="navbar-nav ml-auto">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+     <span><ion-icon class="icon-ion" name="person-circle-outline" size="large"></ion-icon></span> {{ user.username }}
+    </a>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+      <a class="dropdown-item" href="{% url 'register' %}">Change password</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="{% url 'logout' %}?next=/">Log out</a>
+    </div>
+  </li>
+</ul>
+{% else %}
+<form class="form-inline ml-auto">
+  <a href="{% url 'login' %}" class="btn btn-outline-success mt-2">Log in</a>
+  <a href="{% url 'register' %}" class="btn btn-primary ml-2 mt-2">Sign up</a>
+</form>
+{% endif %}
+
+{% block content %}
+<div class = "fontclassic">
+  <div id = "header"?>
+      <br><br><br><br><h1 style="text-align:center;">{{ article.title }}</h1>
+      <h3 class="ml-5">Created-At:{{ article.createdAt }}</h3>
+      <h4 class="ml-5">Written By:
+          {% for author in article.authors.all %}
+              <a href ="{% url 'get_author' author.id %}">
+              {{ author }}
+              </a>
+          {% endfor %}
+      </h4>
+      <div>
+
+          <p  class="lead container" style="margin-top: 5rem;text-align: center; max-width: 90%; white-space: pre-wrap;">              
+              {{article.content}}
+              
+              
+          </p>    
+          
+
+
+            <div class="content container" data-aos="fade-right">
+                <div class="row" data-aos="fade-right">
+                    <div class="col-md-8" data-aos="fade-right">
+                      <div class="blog_posts" data-aos="fade-right">
+                        <h3 style="margin-top: 4rem;"> Comments :-</h3>
+                        <form action ="" method="POST"> 
+                          <div class="form-group container">
+                              {% csrf_token %}
+                              <input type="text" name="Comment" class="form-control" placeholder="write a  comment"><br><br>
+                              <h4 style="text-align:center;"><button type="sumbit" class="btn btn-primary mb-2">Post</button>
+                                  <button type="reset" class="btn btn-primary mb-2">Reset</button></h4>
+                          </div>
+                      
+                        </form>
+                        {% for comments in  comment  %}       
+                        <div class="jumbotron" style="margin-left: auto;margin-right: auto;margin-top: 11%;" data-aos="fade-right">
+                        <div class="post">
+                            
+
+                            <div class="lead" style="color: black;">
+                                <p style="font-size: 40px;">{{ comments }}</p>
+                                <h4 style="font-size: 20px;" class="ml-1">By:
+                                  {% for author in article.authors.all %}
+                                      <a href ="{% url 'get_author' author.id %}">
+                                      {{ author }}
+                                      </a>
+                                  {% endfor %}
+                              </h4>
+                            </div>
+                            
+                        </div>
+                        <hr style="border: 1px solid black;">
+                        </div>
+                    
+                        {% endfor %}
+          
+                      </div>
+          
+                    </div>
+                </div>
+            </div>
+         </p> 
+      </div>
+        
+  </div>
+</div>
+
+
+
+
+{% endblock %}

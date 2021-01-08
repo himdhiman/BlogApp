@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-width,initial-scale=1.0">
+        <meta http-equiv="X-ua-Compartible" content="ie=edge">
+        <title>blog application</title>
+        <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<!-- google fonts -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+
+<!-- author.html -->
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin:700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alike">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Delius">
+
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/post.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">My Blog</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home' %}">Home
+                  <span class="sr-only">(current)</span>
+                </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Top Blogs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'create_article' %}">Write Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'view_authors' %}">Our Authors</a>
+          </li>
+          <li class="nav-item">
+            <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'search' %}" name="form">
+              <input class="form-control mr-sm-2 ml-5" type="text" name="search" placeholder="Search"/>
+            </form>
+          </li>
+
+        </ul>
+
+        {% if user.is_authenticated %}
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <span><ion-icon class="icon-ion" name="person-circle-outline" size="large"></ion-icon></span> {{ user.username }}
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'logout' %}?next=/">Log out</a>
+            </div>
+          </li>
+        </ul>
+      {% else %}
+        <form class="form-inline ml-auto">
+          <a href="{% url 'login' %}" class="btn btn-outline-success mt-2">Log in</a>
+          <a href="{% url 'register' %}" class="btn btn-primary ml-2 mt-2">Sign up</a>
+        </form>
+      {% endif %}
+
+
+      </div>
+
+    </div>
+  </nav>
+
+    </head>
+    <body style="background-image: url('../../static/img/auth_bg.jpg'); height: 100vh;">
+        {% block content %} {% endblock %}
+
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+          AOS.init();
+        </script>
+    </body>
+
+</html>

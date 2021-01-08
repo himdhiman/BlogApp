@@ -1,0 +1,37 @@
+
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class = "font">
+
+  <div class="content container" data-aos="fade-right">
+      <div class="row" data-aos="fade-right">
+          <div class="col-md-8" data-aos="fade-right">
+            <div class="blog_posts" data-aos="fade-right">
+            
+              {% for post in latest_articles %}
+              <div class="jumbotron" style="margin-left: auto;margin-right: auto;margin-top: 11%;" data-aos="fade-right">
+              <div class="post">
+                  <h3><a href="{% url 'get_article' post.pk%}">{{post.title}}</a></h3>
+                  <div class="">
+                      <p>Published on: {{post.createdAt|date:"D, d M, Y"}}</p>
+                  </div>
+                  
+              </div>
+              <hr style="border: 1px solid black;">
+              </div>
+          
+              {% endfor %}
+
+            </div>
+
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
+

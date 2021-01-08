@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+<div id = "head1">
+    <hr><hr><hr><h1>Create new author</h1>
+    <!--{% if success %}
+        <p>Author created succesfully</p>
+    {% endif %}-->
+    <!--form action ="" method="POST"-->
+       
+            
+           <!-- <br><br><br><br><input type="text" class="form-control" name="name" placeholder="put your name here"><br><br>
+            <h4 style="text-align:center;"><button type="sumbit" class="btn btn-primary mb-2">Sumbit</button>
+            <button type="reset" class="btn btn-primary mb-2">Reset</button></h4>
+        </div>
+    </form>-->
+            <form action ="" method="POST"> 
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{ create_auth }}
+                    <h4 style="text-align:center;"><button type="sumbit" class="btn btn-primary mb-2">Submit</button>
+                        <button type="reset" class="btn btn-primary mb-2">Reset</button></h4>
+                </div>
+            </form>
+
+
+        <p style="text-align:center;"><a href="{% url 'create_article' %}">
+            Enter the blogging world
+        </a></p>
+</div>
+{% endblock %}

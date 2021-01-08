@@ -1,0 +1,45 @@
+{% extends 'main/base.html' %}
+{%block content%}
+<div class = "font">
+    <div id = "head">
+    <hr><hr><hr><hr><h1 style="text-align:center;">{{ author.name}}</h1>
+        <h4>Articles Written</h4>
+        <ul>
+            {% for article in author.article_set.all %}
+                <li>
+                    <a href="{% url 'get_article' article.id %}">
+                        {{ article }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+   <!--div class = "authorbg">
+       <div  class ="author_styling">
+       
+            <header class="masthead">
+                <div class="intro-body" style="text-align: left;height: 300px;"><strong></strong>
+                    <hr><hr><hr><hr><div class="card" style="width: 250px;height: 500px;border-color: rgb(30,28,28);background: rgb(8,11,11);opacity: 0.71;">
+                        <div class="card-body">
+                            <h4 class="card-title" style="text-shadow: 0px 0px, 0px 0px;background: #0e0e0d;color: rgba(0,232,121,0.91);text-align: center;font-family: 'Delius Unicase', cursive;border-color: rgba(237,237,242,0.33);font-size: 20px;">contribution</h4>
+                            <ul>
+                                <li>Item 1</li>
+                                <li>Item 2</li>
+                                <li>Item 3</li>
+                                <li>Item 4</li>
+                            </ul>
+                        </div>
+                        <div class="card"></div>
+                    </div><img></div>
+            </header>
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+            <script src="assets/js/grayscale.js"></script>
+        </div>
+
+    </div-->
+    
+{% endblock %}
